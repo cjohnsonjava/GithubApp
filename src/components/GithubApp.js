@@ -15,7 +15,7 @@ const GithubApp = () => {
     const [following, setFollowing] = useState(0);
 
     const myHeaders = new Headers();
-    const authHeader = "Basic " + btoa(process.env.REACT_APP_GITHUB_CLIENT_ID + ":" + process.env.REACT_APP_GITHUB_CLIENT_SECRET);
+    const authHeader = "Basic " + btoa(":" );
     myHeaders.append("Authorization", authHeader);
 
     const requestOptions = {
@@ -30,6 +30,8 @@ const GithubApp = () => {
 
     const fetchUser = async () => {
         setFetching(true);
+        console.log(process.env)
+        console.log(process.env.REACT_APP_GITHUB_CLIENT_ID)
         const resp = await fetch(`https://api.github.com/users/${username}`, requestOptions);
         const user = await resp.json();
         if(user) { 
@@ -76,7 +78,8 @@ const GithubApp = () => {
 
     return (
         <div className="container">
-            <h3>What language does User code in?</h3>
+            
+            <h2>What language does this User code in?</h2>
             <p>(based on user's contributions to public Github repositories)</p>
             <input 
                 type="text"
